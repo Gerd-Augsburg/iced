@@ -18,6 +18,9 @@ pub enum Event {
         /// The key pressed with all keyboard modifiers applied, except Ctrl.
         modified_key: Key,
 
+        /// The key on keyboard layer 0 pressed.
+        baselayer_key: Key,
+
         /// The physical key pressed.
         physical_key: key::Physical,
 
@@ -38,6 +41,9 @@ pub enum Event {
 
         /// The key released with all keyboard modifiers applied, except Ctrl.
         modified_key: Key,
+
+        /// The key on keyboard layer 0 released.
+        baselayer_key: Key,
 
         /// The physical key released.
         physical_key: key::Physical,

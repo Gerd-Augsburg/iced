@@ -620,6 +620,7 @@ impl SctkEvent {
                                 text: ke.utf8.map(|s| s.into()),
                                 modifiers: modifiers_to_native(*modifiers),
                                 physical_key,
+                                baselayer_key: key.clone(),
                                 modified_key: key, // TODO calculate without Ctrl?
                             },
                         ),
@@ -645,6 +646,7 @@ impl SctkEvent {
                                 text: utf8.map(|s| s.into()),
                                 modifiers: modifiers_to_native(*modifiers),
                                 physical_key,
+                                baselayer_key: key.clone(),
                                 modified_key: key, // TODO calculate without Ctrl?
                             },
                         ),
@@ -662,6 +664,7 @@ impl SctkEvent {
                                 key: k.clone(),
                                 location,
                                 modifiers: modifiers_to_native(*modifiers),
+                                baselayer_key: k.clone(),
                                 modified_key: k,
                                 physical_key: physical_key,
                             },
