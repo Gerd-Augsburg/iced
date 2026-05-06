@@ -305,7 +305,7 @@ pub fn window_event(
         // Ignore keyboard presses/releases during window focus/unfocus
         WindowEvent::KeyboardInput { is_synthetic, .. } if is_synthetic => None,
         WindowEvent::KeyboardInput { event, .. } => Some(Event::Keyboard({
-            let key = {
+            let baselayer_key = {
                 #[cfg(not(target_arch = "wasm32"))]
                 {
                     event.key_without_modifiers
@@ -341,8 +341,16 @@ pub fn window_event(
                 ..
             } = event;
 
-            let key = self::key(key);
+            let baselayer_key = self::key(baselayer_key);
             let modified_key = self::key(logical_key);
+            let key = match modified_key.clone() {
+                keyboard::Key::Character(c) => {
+                    let lower =
+                        SmolStr::new_inline(&c.as_str().to_ascii_lowercase());
+                    keyboard::Key::Character(lower)
+                }
+                key => key,
+            };
             let physical_key = self::physical_key(physical_key);
             let modifiers = self::modifiers(modifiers);
 
@@ -364,6 +372,7 @@ pub fn window_event(
                     keyboard::Event::KeyPressed {
                         key,
                         modified_key,
+                        baselayer_key,
                         physical_key,
                         modifiers,
                         location,
@@ -375,6 +384,7 @@ pub fn window_event(
                     keyboard::Event::KeyReleased {
                         key,
                         modified_key,
+                        baselayer_key,
                         physical_key,
                         modifiers,
                         location,

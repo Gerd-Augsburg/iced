@@ -639,6 +639,7 @@ impl SctkEvent {
                                 modifiers: modifiers_to_native(*modifiers),
                                 physical_key,
                                 repeat: false,
+                                baselayer_key: key.clone(),
                                 modified_key: key, // TODO calculate without Ctrl?
                             },
                         ),
@@ -665,6 +666,7 @@ impl SctkEvent {
                                 modifiers: modifiers_to_native(*modifiers),
                                 physical_key,
                                 repeat: true,
+                                baselayer_key: key.clone(),
                                 modified_key: key, // TODO calculate without Ctrl?
                             },
                         ),
@@ -682,6 +684,7 @@ impl SctkEvent {
                                 key: k.clone(),
                                 location,
                                 modifiers: modifiers_to_native(*modifiers),
+                                baselayer_key: k.clone(),
                                 modified_key: k,
                                 physical_key: physical_key,
                             },
